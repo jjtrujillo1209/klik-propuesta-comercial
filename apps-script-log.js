@@ -25,8 +25,8 @@ function doPost(e) {
     if (!sheet) {
       sheet = ss.insertSheet(SHEET_NAME);
       sheet.appendRow([
-        "N°", "Fecha (Bogotá)", "User Agent", "Navegador",
-        "Idioma", "Pantalla", "Referrer", "URL"
+        "N°", "Fecha (Bogotá)", "Nombre", "Email",
+        "Navegador", "Pantalla", "Referrer", "URL"
       ]);
       sheet.getRange(1, 1, 1, 8).setFontWeight("bold").setBackground("#E8474A").setFontColor("#FFFFFF");
       sheet.setFrozenRows(1);
@@ -41,9 +41,9 @@ function doPost(e) {
     sheet.appendRow([
       num,
       data.fecha || new Date().toLocaleString(),
-      data.userAgent || "",
+      data.nombre   || "—",
+      data.email    || "—",
       browser,
-      data.idioma || "",
       data.pantalla || "",
       data.referrer || "",
       data.url || ""

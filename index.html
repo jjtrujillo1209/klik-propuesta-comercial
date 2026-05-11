@@ -26,21 +26,38 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
 
-  /* ── CONFIDENTIALITY POPUP ── */
-  #conf-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;}
-  #conf-modal{background:#161616;border:1px solid var(--coral-border);border-radius:18px;max-width:480px;width:100%;padding:36px 32px;box-shadow:0 24px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(232,71,74,0.1);animation:modalIn .35s cubic-bezier(.22,1,.36,1);}
-  @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
-  .conf-icon{width:52px;height:52px;border-radius:14px;background:var(--coral-dim);border:1px solid var(--coral-border);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
-  .conf-badge{display:inline-flex;align-items:center;gap:6px;background:var(--coral-dim);border:1px solid var(--coral-border);border-radius:100px;padding:4px 12px;font-size:.6rem;letter-spacing:1.5px;color:var(--coral);text-transform:uppercase;font-weight:700;margin-bottom:16px;}
-  .conf-title{font-size:1.25rem;font-weight:900;line-height:1.2;margin-bottom:10px;letter-spacing:-.3px;}
-  .conf-body{font-size:.78rem;color:var(--gray);line-height:1.75;margin-bottom:24px;}
+  /* ── AUTH / CONFIDENTIALITY MODALS ── */
+  .gate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .gate-modal{background:#161616;border-radius:20px;max-width:460px;width:100%;padding:36px 32px;box-shadow:0 32px 80px rgba(0,0,0,0.8);animation:modalIn .4s cubic-bezier(.22,1,.36,1);}
+  @keyframes modalIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+
+  /* Step 1 — Login */
+  #step-login{border:1px solid rgba(255,255,255,0.1);}
+  .gate-logo{font-size:1.1rem;font-weight:900;letter-spacing:3px;color:var(--coral);margin-bottom:28px;}
+  .gate-headline{font-size:1.4rem;font-weight:900;line-height:1.2;margin-bottom:8px;}
+  .gate-sub{font-size:.78rem;color:var(--gray);line-height:1.7;margin-bottom:28px;}
+  .google-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:13px 20px;background:#fff;border:none;border-radius:10px;color:#1f1f1f;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+  .google-btn:hover{background:#f5f5f5;box-shadow:0 4px 20px rgba(0,0,0,0.4);transform:translateY(-1px);}
+  .google-btn svg{flex-shrink:0;}
+  .gate-divider{margin-top:20px;text-align:center;font-size:.62rem;color:rgba(255,255,255,0.18);}
+
+  /* Step 2 — Confidentiality */
+  #step-conf{border:1px solid var(--coral-border);display:none;}
+  .user-pill{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:22px;}
+  .user-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--coral);}
+  .user-avatar-placeholder{width:36px;height:36px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;flex-shrink:0;}
+  .user-info-name{font-size:.8rem;font-weight:700;color:var(--white);}
+  .user-info-email{font-size:.65rem;color:var(--gray);}
+  .conf-badge{display:inline-flex;align-items:center;gap:6px;background:var(--coral-dim);border:1px solid var(--coral-border);border-radius:100px;padding:4px 12px;font-size:.6rem;letter-spacing:1.5px;color:var(--coral);text-transform:uppercase;font-weight:700;margin-bottom:14px;}
+  .conf-title{font-size:1.15rem;font-weight:900;line-height:1.2;margin-bottom:8px;}
+  .conf-body{font-size:.76rem;color:var(--gray);line-height:1.75;margin-bottom:18px;}
   .conf-body strong{color:var(--white);}
-  .conf-checks{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;padding:16px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid var(--border);}
-  .conf-check{display:flex;align-items:flex-start;gap:10px;font-size:.72rem;color:var(--gray);line-height:1.5;}
+  .conf-checks{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;padding:14px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid var(--border);}
+  .conf-check{display:flex;align-items:flex-start;gap:10px;font-size:.71rem;color:var(--gray);line-height:1.5;}
   .conf-check::before{content:'';width:16px;height:16px;min-width:16px;border-radius:4px;background:var(--coral-dim);border:1px solid var(--coral-border);margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E8474A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
-  .conf-btn{width:100%;padding:14px;background:var(--coral);border:none;border-radius:10px;color:#fff;font-size:.85rem;font-weight:800;letter-spacing:.4px;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(232,71,74,0.35);}
-  .conf-btn:hover{background:#d63b3e;box-shadow:0 6px 28px rgba(232,71,74,0.5);transform:translateY(-1px);}
-  .conf-footer{margin-top:14px;text-align:center;font-size:.62rem;color:rgba(255,255,255,0.2);}
+  .conf-btn{width:100%;padding:13px;background:var(--coral);border:none;border-radius:10px;color:#fff;font-size:.83rem;font-weight:800;letter-spacing:.4px;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(232,71,74,0.35);}
+  .conf-btn:hover{background:#d63b3e;transform:translateY(-1px);}
+  .conf-footer{margin-top:12px;text-align:center;font-size:.6rem;color:rgba(255,255,255,0.18);}
 
   /* ── NAV ── */
   nav{background:rgba(10,10,10,0.97);border-bottom:1px solid var(--coral-border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
@@ -191,22 +208,40 @@
 </head>
 <body>
 
-<!-- CONFIDENTIALITY POPUP -->
-<div id="conf-overlay">
-  <div id="conf-modal">
-    <div class="conf-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8474A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+<!-- STEP 1: GOOGLE LOGIN -->
+<div class="gate-overlay" id="step-login">
+  <div class="gate-modal">
+    <div class="gate-logo">KLIK.ENERGY</div>
+    <div class="gate-headline">Acceso restringido</div>
+    <p class="gate-sub">Este documento es <strong style="color:#fff">estrictamente confidencial</strong>. Inicia sesión con tu cuenta de Google para continuar. Tu acceso quedará registrado.</p>
+    <button class="google-btn" onclick="iniciarGoogle()">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.2l6.7-6.7C35.8 2.5 30.2 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.8 6.1C12.4 13 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.4 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.6 13.3A23.9 23.9 0 0 0 0 24c0 3.8.9 7.4 2.6 10.7l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.2 0-11.5-4.2-13.4-9.8l-7.8 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+      Continuar con Google
+    </button>
+    <div class="gate-divider">Solo cuentas autorizadas · acceso verificado</div>
+  </div>
+</div>
+
+<!-- STEP 2: CONFIDENTIALITY -->
+<div class="gate-overlay" id="step-conf">
+  <div class="gate-modal">
+    <div class="user-pill" id="user-pill">
+      <div class="user-avatar-placeholder" id="user-initial">?</div>
+      <div>
+        <div class="user-info-name" id="user-name">Cargando...</div>
+        <div class="user-info-email" id="user-email"></div>
+      </div>
     </div>
     <div class="conf-badge">Documento Confidencial</div>
     <div class="conf-title">Acuerdo de Confidencialidad</div>
-    <div class="conf-body">Este documento contiene información comercial <strong>estrictamente confidencial</strong> elaborada por Juan José Trujillo para uso exclusivo del equipo directivo de <strong>KLIK Energy</strong>. Su acceso implica aceptar las siguientes condiciones:</div>
+    <div class="conf-body">Este documento contiene información comercial <strong>estrictamente confidencial</strong> elaborada por Juan José Trujillo para uso exclusivo del equipo directivo de <strong>KLIK Energy</strong>.</div>
     <div class="conf-checks">
       <div class="conf-check">No compartiré este documento con terceros sin autorización expresa del autor.</div>
-      <div class="conf-check">La información de precios, márgenes y estrategias es de uso exclusivo interno de KLIK Energy.</div>
+      <div class="conf-check">La información de precios y estrategias es de uso exclusivo interno de KLIK Energy.</div>
       <div class="conf-check">Este documento tiene validez de <strong>15 días calendario</strong> desde su emisión.</div>
     </div>
     <button class="conf-btn" onclick="aceptarConfidencialidad()">Entiendo y acepto — Acceder a la propuesta</button>
-    <div class="conf-footer">KLIK Energy · Mayo 2026 · Propuesta Comercial Confidencial</div>
+    <div class="conf-footer">KLIK Energy · Mayo 2026 · tu acceso queda registrado</div>
   </div>
 </div>
 
@@ -495,19 +530,80 @@
   <div class="footer-copy">Confidencial · Uso exclusivo equipo directivo KLIK Energy · 2026</div>
 </footer>
 
+<script src="https://accounts.google.com/gsi/client" async></script>
 <script>
-  const APPS_SCRIPT_URL = "REEMPLAZAR_CON_TU_URL";
+  const GOOGLE_CLIENT_ID = "REEMPLAZAR_CON_TU_CLIENT_ID";
+  const APPS_SCRIPT_URL  = "REEMPLAZAR_CON_TU_APPS_SCRIPT_URL";
+
+  let currentUser = null;
+
+  function iniciarGoogle() {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: onGoogleSignIn,
+      auto_select: false,
+      cancel_on_tap_outside: false
+    });
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // Si One Tap no se muestra, usamos popup OAuth manual
+        const client = google.accounts.oauth2.initTokenClient({
+          client_id: GOOGLE_CLIENT_ID,
+          scope: 'openid email profile',
+          callback: '',
+        });
+        google.accounts.id.renderButton(
+          document.createElement('div'),
+          { theme: 'outline', size: 'large' }
+        );
+        google.accounts.id.prompt();
+      }
+    });
+  }
+
+  function onGoogleSignIn(response) {
+    // Decodificar JWT sin librerías externas
+    const parts = response.credential.split('.');
+    const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+
+    currentUser = {
+      nombre: payload.name,
+      email:  payload.email,
+      foto:   payload.picture
+    };
+
+    // Actualizar UI del step 2
+    document.getElementById('user-name').textContent  = currentUser.nombre;
+    document.getElementById('user-email').textContent = currentUser.email;
+    document.getElementById('user-initial').textContent = currentUser.nombre.charAt(0).toUpperCase();
+
+    if (currentUser.foto) {
+      const img = document.createElement('img');
+      img.src = currentUser.foto;
+      img.className = 'user-avatar';
+      img.alt = currentUser.nombre;
+      const pill = document.getElementById('user-pill');
+      pill.replaceChild(img, pill.firstElementChild);
+    }
+
+    // Transición de modales
+    document.getElementById('step-login').style.display = 'none';
+    document.getElementById('step-conf').style.display  = 'flex';
+  }
 
   function aceptarConfidencialidad() {
-    document.getElementById('conf-overlay').style.display = 'none';
+    document.getElementById('step-conf').style.display = 'none';
+
+    if (!currentUser) return;
 
     const payload = {
-      fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+      nombre:    currentUser.nombre,
+      email:     currentUser.email,
+      fecha:     new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
       userAgent: navigator.userAgent,
-      idioma: navigator.language,
-      pantalla: screen.width + 'x' + screen.height,
-      referrer: document.referrer || 'Acceso directo',
-      url: location.href
+      pantalla:  screen.width + 'x' + screen.height,
+      referrer:  document.referrer || 'Acceso directo',
+      url:       location.href
     };
 
     fetch(APPS_SCRIPT_URL, {
