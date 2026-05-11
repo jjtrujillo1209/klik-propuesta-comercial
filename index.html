@@ -205,7 +205,7 @@
       <div class="conf-check">La información de precios, márgenes y estrategias es de uso exclusivo interno de KLIK Energy.</div>
       <div class="conf-check">Este documento tiene validez de <strong>15 días calendario</strong> desde su emisión.</div>
     </div>
-    <button class="conf-btn" onclick="document.getElementById('conf-overlay').style.display='none'">Entiendo y acepto — Acceder a la propuesta</button>
+    <button class="conf-btn" onclick="aceptarConfidencialidad()">Entiendo y acepto — Acceder a la propuesta</button>
     <div class="conf-footer">KLIK Energy · Mayo 2026 · Propuesta Comercial Confidencial</div>
   </div>
 </div>
@@ -495,5 +495,28 @@
   <div class="footer-copy">Confidencial · Uso exclusivo equipo directivo KLIK Energy · 2026</div>
 </footer>
 
+<script>
+  const APPS_SCRIPT_URL = "REEMPLAZAR_CON_TU_URL";
+
+  function aceptarConfidencialidad() {
+    document.getElementById('conf-overlay').style.display = 'none';
+
+    const payload = {
+      fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+      userAgent: navigator.userAgent,
+      idioma: navigator.language,
+      pantalla: screen.width + 'x' + screen.height,
+      referrer: document.referrer || 'Acceso directo',
+      url: location.href
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  }
+</script>
 </body>
 </html>
