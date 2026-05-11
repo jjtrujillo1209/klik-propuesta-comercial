@@ -204,6 +204,80 @@
 
   /* ── SECTION LABEL ── */
   .section-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:12px;}
+
+  /* ── TABLET (≤ 768px) ── */
+  @media(max-width:768px){
+    nav{padding:12px 20px;}
+    .nav-right{font-size:.65rem;letter-spacing:0;}
+
+    .page{padding:32px 20px 48px;}
+
+    .doc-title{font-size:1.8rem;}
+    .doc-sub{font-size:.88rem;}
+    .doc-meta{gap:14px;}
+
+    .proposals{grid-template-columns:1fr;}
+
+    .price-main{font-size:2rem;}
+
+    .scenarios{grid-template-columns:repeat(3,1fr);gap:6px;}
+    .sc-mqls{font-size:1.2rem;}
+
+    .comparison{overflow-x:auto;}
+    .comp-header,.comp-row{grid-template-columns:1.4fr 1fr 1fr;min-width:480px;}
+    .comp-cell{padding:9px 12px;font-size:.7rem;}
+    .comp-col{padding:10px 12px;}
+
+    .steps-row{grid-template-columns:repeat(3,1fr);}
+
+    footer{padding:24px 20px;}
+
+    .gate-modal{padding:28px 22px;}
+    .gate-headline{font-size:1.2rem;}
+  }
+
+  /* ── MOBILE (≤ 480px) ── */
+  @media(max-width:480px){
+    nav{padding:11px 16px;}
+    .nav-right{display:none;}
+
+    .page{padding:24px 16px 40px;}
+
+    .doc-title{font-size:1.5rem;letter-spacing:-.5px;}
+    .doc-sub{font-size:.82rem;}
+    .doc-meta{flex-direction:column;gap:6px;}
+
+    .price-main{font-size:1.8rem;}
+
+    .prop-header{padding:16px 16px 14px;}
+    .price-block,.var-block,.tools-block,.scenarios-block,
+    .benefits-block,.bonus-block,.conditions-block,.bonus-block{padding:14px 16px;}
+
+    .scenarios{grid-template-columns:1fr;gap:8px;}
+    .scenario{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:10px 14px;}
+    .sc-label{margin-bottom:0;min-width:60px;}
+    .sc-mqls{font-size:1.1rem;}
+    .sc-mql-sub{margin-bottom:0;}
+
+    .var-row{flex-direction:column;gap:4px;}
+
+    .comparison{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .comp-header,.comp-row{min-width:520px;}
+
+    .steps-row{grid-template-columns:1fr 1fr;gap:10px;}
+
+    .bonus-val{font-size:.95rem;}
+
+    footer{padding:20px 16px;}
+    .footer-cta{padding:10px 24px;font-size:.82rem;}
+
+    .gate-modal{padding:24px 18px;border-radius:16px;}
+    .gate-headline{font-size:1.1rem;}
+    .gate-sub{font-size:.74rem;}
+    .google-btn{font-size:.8rem;padding:12px 16px;}
+    .conf-title{font-size:1rem;}
+    .conf-body{font-size:.72rem;}
+  }
 </style>
 </head>
 <body>
